@@ -8,11 +8,11 @@ import ebotplayer.util.*;
 public class Gardener {
     private RobotController rc;
     private Common c;
-    private boolean type;
     public Gardener(RobotController rc) {
         this.rc = rc;
         Movement m = new Movement(rc);
         Common c = new Common(rc);
+        boolean type;
         double rand = Math.random();
         // the random stuff is used to determine what i want my gardner to do
         //if type = true, i have the gardners build robots
@@ -68,9 +68,10 @@ public class Gardener {
             float lowestH = 50;
             int tID = 0;
             for(TreeInfo t : fTrees) {
-                if (t.getHealth() < 0)
-                lowestH = t.getHealth();
-                tID = t.getID();
+                if (t.getHealth() < lowestH) {
+                    lowestH = t.getHealth();
+                    tID = t.getID();
+                }
             }
             rc.water(tID);
         }

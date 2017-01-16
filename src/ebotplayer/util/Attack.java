@@ -6,14 +6,11 @@ import battlecode.common.*;
  */
 public class Attack {
     private RobotController rc;
-    // i have no idea if i actually need to initialize c since i jsut call a method
-    // if theres an error this is probably why
-    // add this to constructor:       c = new Common(rc);
     private Common c;
     public Attack(RobotController rc) {
         this.rc = rc;
+        c = new Common(rc);
     }
-
     public void bullet() throws GameActionException {
        RobotInfo[] robots = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
        if (robots.length > 0) {
