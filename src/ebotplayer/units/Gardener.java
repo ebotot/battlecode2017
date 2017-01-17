@@ -50,6 +50,7 @@ public class Gardener {
             Direction seed = Tools.randomDirection();
             int i = 0;
             // used i < 5 to make sure gardener would not get stuck in infinite loop finding a nonexistent valid direction
+            //TODO build 8 trees around each
             while (!rc.canPlantTree(seed) && i < 2) {
                 seed = Tools.randomDirection();
                 i++;
