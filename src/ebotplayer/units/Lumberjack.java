@@ -7,15 +7,20 @@ import ebotplayer.util.*;
  */
 public class Lumberjack {
     private RobotController rc;
+    private int choppingID;
     public Lumberjack(RobotController rc) {
         this.rc = rc;
         Attack a = new Attack(rc);
         Movement m = new Movement(rc);
+        int choppingID;
         while(true) {
             try {
                 a.strike();
-                chop();
-                m.wander(45, 7);
+                if (canChop()) {
+                    chop();
+                } else {
+                    m.wander(45, 7);
+                }
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Lumberjack Exception");
@@ -26,15 +31,25 @@ public class Lumberjack {
     boolean canChop() throws GameActionException {
         TreeInfo[] trees = rc.senseNearbyTrees(rc.getType().sensorRadius, Team.NEUTRAL);
         if (trees.length > 0) {
-            if (rc.canChop(trees[0].location) && (trees[0].containedBullets > 0 || trees[0].containedRobot != null)) {
-                return true;
+            for (TreeInfo ctree : trees) {
+                if (rc.canChop(trees[0].location) && (trees[0].containedBullets > 0 || trees[0].containedRobot != null)) {
+                    choppingID = trees[0].ID;
+                    return true;
+                }
+            } for (TreeInfo ctree : trees) { //repeated the for-loop so that if no bullet or robot trees are nearby, they'll jsut cut down a regular one
+                //should probably find a more elegant solution
+                //or maybe we should just have them cut down all trees regardless or only special trees?
+                if (rc.canChop(trees[0].location)) {
+                    choppingID = trees[0].ID;
+                    return true;
+                }
             }
         }
         return false;
     }
     void chop() throws GameActionException {
-        if (canChop()) {
-            //rc.chop(trees[0].location);
+        if (rc.canChop(choppingID)) {
+            rc.chop(choppingID);
             System.out.println("chopped");
         }
     }
