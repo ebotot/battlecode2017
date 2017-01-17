@@ -20,7 +20,7 @@ public class Gardener {
         // for some reason Math.random() produced mostly small decimals even tho
         // the javadocs said that it should be a decimal from 0-1
         // from my testing 0.25 seems to be the halfway point? idk something to look into
-        if (rand < 0.25) {
+        if (rand < 0.20) {
             type = true;
             System.out.println("builder: " + rand);
         }
@@ -63,17 +63,20 @@ public class Gardener {
         }
     }
     void water() throws GameActionException { //TODO test watering
-        TreeInfo[] fTrees = rc.senseNearbyTrees(rc.getType().sensorRadius, c.friendly());
-        if (fTrees.length>0) {
+        TreeInfo[] fTrees = rc.senseNearbyTrees(rc.getType().sensorRadius, rc.getTeam());
+        if (fTrees.length > 0) {
             float lowestH = 50;
             int tID = 0;
             for(TreeInfo t : fTrees) {
-                if (t.getHealth() < lowestH) {
+                if (t.getHealth() < lowestH && rc.canWater(t.getID())) {
                     lowestH = t.getHealth();
                     tID = t.getID();
                 }
             }
-            rc.water(tID);
+            if (rc.canWater(tID)) {
+                rc.water(tID);
+                System.out.println("watered");
+            }
         }
     }
     void bUnit(RobotType type) throws GameActionException {
