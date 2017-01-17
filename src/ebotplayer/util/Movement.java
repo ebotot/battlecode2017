@@ -11,7 +11,7 @@ public class Movement {
         this.rc = rc;
         dir = new Direction(0);
     }
-    public void setDir(Direction dir){
+    private void setDir(Direction dir){
         this.dir = dir;
     }
 

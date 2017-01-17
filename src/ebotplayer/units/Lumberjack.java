@@ -7,14 +7,19 @@ import ebotplayer.util.*;
  */
 public class Lumberjack {
     private RobotController rc;
+    private Common c;
+    private Movement m;
+    private Attack a;
     private int choppingID;
     public Lumberjack(RobotController rc) {
         this.rc = rc;
-        Attack a = new Attack(rc);
-        Movement m = new Movement(rc);
+        c = new Common(rc);
+        m = new Movement(rc);
+        a = new Attack(rc);
         int choppingID;
         while(true) {
             try {
+                c.vp();
                 a.strike();
                 if (canChop()) {
                     chop();
@@ -28,7 +33,7 @@ public class Lumberjack {
             }
         }
     }
-    boolean canChop() throws GameActionException {
+    private boolean canChop() {
         TreeInfo[] trees = rc.senseNearbyTrees(rc.getType().sensorRadius, Team.NEUTRAL);
         if (trees.length > 0) {
             for (TreeInfo ctree : trees) {
@@ -47,7 +52,7 @@ public class Lumberjack {
         }
         return false;
     }
-    void chop() throws GameActionException {
+    private void chop() throws GameActionException {
         if (rc.canChop(choppingID)) {
             rc.chop(choppingID);
             System.out.println("chopped");

@@ -8,10 +8,11 @@ import ebotplayer.util.*;
 public class Gardener {
     private RobotController rc;
     private Common c;
+    private Movement m;
     public Gardener(RobotController rc) {
         this.rc = rc;
-        Movement m = new Movement(rc);
-        Common c = new Common(rc);
+        c = new Common(rc);
+        m = new Movement(rc);
         boolean type;
         double rand = Math.random();
         //im so fucking confused guys whats the halfway point for Math.random() LOL
@@ -27,6 +28,7 @@ public class Gardener {
         while(true) {
             try {
                 if (type) {
+                    c.vp();
                     c.shake();
                     bUnit(RobotType.SOLDIER);
                     bUnit(RobotType.LUMBERJACK);
@@ -45,7 +47,7 @@ public class Gardener {
             }
         }
     }
-    void plant() throws GameActionException {
+    private void plant() throws GameActionException {
         if (rc.hasTreeBuildRequirements()) {
             Direction seed = Tools.randomDirection();
             int i = 0;
@@ -59,7 +61,7 @@ public class Gardener {
             }
         }
     }
-    void water() throws GameActionException {
+    private void water() throws GameActionException {
         TreeInfo[] fTrees = rc.senseNearbyTrees(rc.getType().sensorRadius, rc.getTeam());
         if (fTrees.length > 0) {
             float lowestH = 50;
@@ -76,7 +78,7 @@ public class Gardener {
             }
         }
     }
-    void bUnit(RobotType type) throws GameActionException {
+    private void bUnit(RobotType type) throws GameActionException {
         Direction bDirection = Tools.randomDirection();
         if (rc.canBuildRobot(type, bDirection)) {
             rc.buildRobot(type, bDirection);

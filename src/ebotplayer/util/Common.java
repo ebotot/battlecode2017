@@ -24,4 +24,7 @@ public class Common {
             }
         }
     }
+    public void vp() throws GameActionException{
+        if(rc.getTeamBullets() >= 10000) rc.donate(10000);
+    }
 }

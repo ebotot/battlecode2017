@@ -6,7 +6,7 @@ import ebotplayer.units.*;
  * Created by ebot on 1/10/17.
  */
 public class RobotPlayer {
-    public static void run(RobotController rc) throws GameActionException {
+    public static void run(RobotController rc) {
         switch(rc.getType()) {
             case ARCHON:
                 Archon a = new Archon(rc);
