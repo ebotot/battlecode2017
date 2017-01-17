@@ -7,15 +7,18 @@ import ebotplayer.util.*;
  */
 public class Archon {
     private RobotController rc;
+    private Common c;
+    private Movement m;
     private int gBuilds;
     public Archon(RobotController rc) {
         this.rc = rc;
-        Movement m = new Movement(rc);
-        Common c = new Common(rc);
+        c = new Common(rc);
+        m = new Movement(rc);
         gBuilds = 0;
         int resetBuilds = 0;
         while(true) {
             try {
+                c.vp();
                 // gBuilds counts how many times gardeners were built and stops after 6 are built
                 // resetBuilds is 20 rounds after gbuilds was set
                 // meaning that after 20 rounds gardeners may be built again
@@ -35,7 +38,7 @@ public class Archon {
             }
         }
     }
-    void hGardener() throws GameActionException {
+    private void hGardener() throws GameActionException {
         if (rc.hasRobotBuildRequirements(RobotType.GARDENER)) {
             Direction bDirection = Tools.randomDirection();
             int i = 0;
