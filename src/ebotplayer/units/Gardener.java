@@ -14,13 +14,9 @@ public class Gardener {
         Common c = new Common(rc);
         boolean type;
         double rand = Math.random();
-        // the random stuff is used to determine what i want my gardner to do
-        //if type = true, i have the gardners build robots
-        //if type = false, i have the gardeners plant trees
-        // for some reason Math.random() produced mostly small decimals even tho
-        // the javadocs said that it should be a decimal from 0-1
-        // from my testing 0.25 seems to be the halfway point? idk something to look into
-        if (rand < 0.20) {
+        //im so fucking confused guys whats the halfway point for Math.random() LOL
+        //i keep adjusting and it seems to change from map to map?
+        if (rand < 0.25) {
             type = true;
             System.out.println("builder: " + rand);
         }

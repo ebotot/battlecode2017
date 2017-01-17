@@ -35,6 +35,7 @@ public class Movement {
         }
     }
     public void moveTo() throws GameActionException {
+        // TODO movement
         //my current idea for this is to have it move towards a coordinate pair specified in the parameter
         //when it runs into an obstruction it will slightly alter its trajectory to move, and on the next turn it will recalculate its trajectory towards the coordinates
     }
