@@ -28,8 +28,6 @@ public class Attack {
         if (robots.length > 0) {
             if (rc.canStrike()) {
                 rc.strike();
-                // if you see random print statements they are probably print statements im using to test in the client
-                // go to the console tab to see these messages
                 System.out.println("struck");
             }
         }
