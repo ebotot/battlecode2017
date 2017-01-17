@@ -12,6 +12,7 @@ public class Soldier {
         Common c = new Common(rc);
         while(true) {
             try {
+                //TODO fix running into bullets
                 a.bullet();
                 c.shake();
                 m.wander(45, 7);
