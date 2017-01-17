@@ -62,7 +62,7 @@ public class Gardener {
             }
         }
     }
-    void water() throws GameActionException { //TODO test watering
+    void water() throws GameActionException {
         TreeInfo[] fTrees = rc.senseNearbyTrees(rc.getType().sensorRadius, rc.getTeam());
         if (fTrees.length > 0) {
             float lowestH = 50;

@@ -15,12 +15,13 @@ public class Common {
     public void shake() throws GameActionException {
         TreeInfo[] trees = rc.senseNearbyTrees(rc.getType().sensorRadius, Team.NEUTRAL);
         if (trees.length > 0) {
-            //TODO add for-loop
-            if (rc.canShake(trees[0].location) && trees[0].containedBullets > 0) {
-                rc.shake(trees[0].location);
-                System.out.println("shook");
+            for (TreeInfo t : trees) {
+                if (rc.canShake(t.location) && t.containedBullets > 0) {
+                    rc.shake(t.location);
+                    System.out.println("shook");
+                    break;
+                }
             }
-
         }
     }
 }
