@@ -36,7 +36,7 @@ public class Archon {
                 tcount = rc.getTreeCount();
                 gardNum = 20-tcount;
                 // if we stick to this method, we could have something similar for lumberjacks
-                if (gardNum>0) {                       //&& rc.senseNearbyTrees(5).length < 4){
+                if (gardNum>0) {                        //&& rc.senseNearbyTrees(5).length < 4){
                     hGardener();
                 }
                 else {
