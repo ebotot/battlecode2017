@@ -10,11 +10,18 @@ public class Archon {
     private Common c;
     private Movement m;
     private int gBuilds;
+    private int tcount;
+    private double gardNum;
+    private int gtimer;
+
     public Archon(RobotController rc) {
         this.rc = rc;
         c = new Common(rc);
         m = new Movement(rc);
         gBuilds = 0;
+        gardNum = 0;
+        tcount = 0;
+        gtimer = 0;
         int resetBuilds = 0;
         while(true) {
             try {
@@ -22,14 +29,26 @@ public class Archon {
                 // gBuilds counts how many times gardeners were built and stops after 6 are built
                 // resetBuilds is 20 rounds after gbuilds was set
                 // meaning that after 20 rounds gardeners may be built again
-                if (rc.getRoundNum() == resetBuilds) {
-                    gBuilds = 0;
-                }
+                //if (rc.getRoundNum() == resetBuilds) {
+                //    gBuilds = 0;
+                //}
                 c.shake();
-                if (gBuilds < 7) {
+                tcount = rc.getTreeCount();
+                gardNum = 20-tcount;
+                // if we stick to this method, we could have something similar for lumberjacks
+                if (gardNum>0) {                       //&& rc.senseNearbyTrees(5).length < 4){
                     hGardener();
-                    resetBuilds = rc.getRoundNum() + 20;
                 }
+                else {
+                    gtimer++;
+                    if (gtimer%25 == 0) {
+                        hGardener();
+                    }
+                }
+                //if (gBuilds < 7) {
+                //    hGardener();
+                //    resetBuilds = rc.getRoundNum() + 20;
+                //}
                 m.wander(45,7);
                 Clock.yield();
             } catch (Exception e) {
