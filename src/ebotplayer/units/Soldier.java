@@ -17,6 +17,7 @@ public class Soldier {
         a = new Attack(rc);
         while(true) {
             try {
+                System.out.println("S");
                 c.vp();
                 a.bullet();
                 c.shake();
