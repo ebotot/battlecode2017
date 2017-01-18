@@ -20,7 +20,9 @@ public class Soldier {
                 c.vp();
                 a.bullet();
                 c.shake();
-                m.wander(45, 7);
+                if (!rc.hasAttacked()) {
+                    m.wander(45, 7);
+                }
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Soldier Exception");
