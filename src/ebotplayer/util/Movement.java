@@ -39,4 +39,7 @@ public class Movement {
         //my current idea for this is to have it move towards a coordinate pair specified in the parameter
         //when it runs into an obstruction it will slightly alter its trajectory to move, and on the next turn it will recalculate its trajectory towards the coordinates
     }
+    public void moveCorner() throws GameActionException {
+        //TODO for the Archon to hide in corner and have trees build around
+    }
 }

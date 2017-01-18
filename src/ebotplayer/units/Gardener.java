@@ -37,6 +37,7 @@ public class Gardener {
                     Clock.yield();
                 }
                 else if (!type) {
+                    c.vp();
                     water();
                     plant();
                     Clock.yield();
