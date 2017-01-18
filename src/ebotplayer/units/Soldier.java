@@ -19,6 +19,7 @@ public class Soldier {
             try {
                 c.vp();
                 a.bullet();
+                System.out.println("harry is orange");
                 c.shake();
                 if (!rc.hasAttacked()) {
                     m.wander(45, 7);
