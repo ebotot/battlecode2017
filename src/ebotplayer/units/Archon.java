@@ -40,10 +40,10 @@ public class Archon {
                     hGardener();
                 }
                 else {
-                    gtimer++;
                     if (gtimer%25 == 0) {
                         hGardener();
                     }
+                    gtimer++;
                 }
                 //if (gBuilds < 7) {
                 //    hGardener();
