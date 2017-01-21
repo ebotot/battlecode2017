@@ -19,8 +19,11 @@ public class Soldier {
             try {
                 c.vp();
                 a.bullet();
+                System.out.println("harry is orange");
                 c.shake();
-                m.wander(45, 7);
+                if (!rc.hasAttacked()) {
+                    m.wander(45, 7);
+                }
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Soldier Exception");
