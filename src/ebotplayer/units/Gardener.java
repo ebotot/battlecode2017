@@ -7,16 +7,26 @@ import ebotplayer.util.*;
  * Created by ebot on 1/10/17.
  */
 public class Gardener extends Unit {
+    private Direction[] plantD;
+    private boolean planter;
     public Gardener(RobotController rc) {
         super(rc);
+        plantD = new Direction[6];
+        for (int i = 0 ; i < 6 ; i++) {
+            plantD[i] = new Direction(0 + i * ((float)Math.PI / 3) );
+        }
         while(true) {
             try {
                 c.vp();
                 u.sendAliveSignal();
                 c.shake();
+                water();
                 bUnit(RobotType.SOLDIER);
                 bUnit(RobotType.LUMBERJACK);
-                m.wander(45, 7);
+                plant();
+                if (rc.senseNearbyTrees((float)1.1, rc.getTeam()).length < 1) {
+                    m.wander(30, 12);
+                }
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Gardener Exception");
@@ -25,16 +35,10 @@ public class Gardener extends Unit {
         }
     }
     private void plant() throws GameActionException {
-        if (rc.hasTreeBuildRequirements()) {
-            Direction seed = Tools.randomDirection();
-            int i = 0;
-            // used i < 5 to make sure gardener would not get stuck in infinite loop finding a nonexistent valid direction
-            //TODO build 8 trees around each
-            while (!rc.canPlantTree(seed) && i < 2) {
-                seed = Tools.randomDirection();
-                i++;
-            } if (rc.canPlantTree(seed)) {
-                rc.plantTree(seed);
+        for (Direction d : plantD) {
+            if (rc.canPlantTree(d)) {
+                rc.plantTree(d);
+                break;
             }
         }
     }
