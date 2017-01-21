@@ -23,13 +23,4 @@ public class Attack {
            }
        }
     }
-    public void strike() throws GameActionException {
-        RobotInfo[] robots = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
-        if (robots.length > 0) {
-            if (rc.canStrike()) {
-                rc.strike();
-                System.out.println("struck");
-            }
-        }
-    }
 }

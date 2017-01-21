@@ -1,18 +1,14 @@
 package ebotplayer.units;
 
 import battlecode.common.*;
+import ebotplayer.units.base.Unit;
 import ebotplayer.util.*;
 /**
  * Created by ebot on 1/10/17.
  */
-public class Gardener {
-    private RobotController rc;
-    private Common c;
-    private Movement m;
+public class Gardener extends Unit {
     public Gardener(RobotController rc) {
-        this.rc = rc;
-        c = new Common(rc);
-        m = new Movement(rc);
+        super(rc);
         boolean type;
         double rand = Math.random();
         //im so fucking confused guys whats the halfway point for Math.random() LOL

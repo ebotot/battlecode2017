@@ -1,26 +1,18 @@
 package ebotplayer.units;
 
 import battlecode.common.*;
-import ebotplayer.util.*;
+import ebotplayer.units.base.Unit;
 /**
  * Created by ebot on 1/10/17.
  */
-public class Lumberjack {
-    private RobotController rc;
-    private Common c;
-    private Movement m;
-    private Attack a;
+public class Lumberjack extends Unit{
     private int choppingID;
     public Lumberjack(RobotController rc) {
-        this.rc = rc;
-        c = new Common(rc);
-        m = new Movement(rc);
-        a = new Attack(rc);
-        int choppingID;
+        super(rc);
         while(true) {
             try {
                 c.vp();
-                a.strike();
+                strike();
                 if (canChop()) {
                     chop();
                 } else {
@@ -56,6 +48,15 @@ public class Lumberjack {
         if (rc.canChop(choppingID)) {
             rc.chop(choppingID);
             System.out.println("chopped");
+        }
+    }
+    private void strike() throws GameActionException {
+        RobotInfo[] robots = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
+        if (robots.length > 0) {
+            if (rc.canStrike()) {
+                rc.strike();
+                System.out.println("struck");
+            }
         }
     }
 }
