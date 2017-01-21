@@ -1,25 +1,17 @@
 package ebotplayer.units;
 
 import battlecode.common.*;
-import ebotplayer.util.*;
+import ebotplayer.units.base.BulletUnit;
 /**
  * Created by ebot on 1/10/17.
  */
-public class Soldier {
-    private RobotController rc;
-    private Common c;
-    private Movement m;
-    private Attack a;
+public class Soldier extends BulletUnit {
     public Soldier(RobotController rc) {
-        this.rc = rc;
-        c = new Common(rc);
-        m = new Movement(rc);
-        a = new Attack(rc);
+        super(rc);
         while(true) {
             try {
                 c.vp();
                 a.bullet();
-                System.out.println("harry is orange");
                 c.shake();
                 if (!rc.hasAttacked()) {
                     m.wander(45, 7);

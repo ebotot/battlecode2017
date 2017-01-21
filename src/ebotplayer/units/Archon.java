@@ -1,19 +1,15 @@
 package ebotplayer.units;
 
 import battlecode.common.*;
+import ebotplayer.units.base.Unit;
 import ebotplayer.util.*;
 /**
  * Created by ebot on 1/10/17.
  */
-public class Archon {
-    private RobotController rc;
-    private Common c;
-    private Movement m;
+public class Archon extends Unit {
     private int gBuilds;
     public Archon(RobotController rc) {
-        this.rc = rc;
-        c = new Common(rc);
-        m = new Movement(rc);
+        super(rc);
         gBuilds = 0;
         int resetBuilds = 0;
         while(true) {
