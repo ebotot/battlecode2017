@@ -9,35 +9,15 @@ import ebotplayer.util.*;
 public class Gardener extends Unit {
     public Gardener(RobotController rc) {
         super(rc);
-        boolean type;
-        double rand = Math.random();
-        //im so fucking confused guys whats the halfway point for Math.random() LOL
-        //i keep adjusting and it seems to change from map to map?
-        if (rand < 0.25) {
-            type = true;
-            System.out.println("builder: " + rand);
-        }
-        else {
-            type = false;
-            System.out.println("planter: " + rand);
-        }
         while(true) {
             try {
-                if (type) {
-                    c.vp();
-                    c.shake();
-                    bUnit(RobotType.SOLDIER);
-                    bUnit(RobotType.LUMBERJACK);
-                    //TODO unit count
-                    m.wander(45, 7);
-                    Clock.yield();
-                }
-                else if (!type) {
-                    c.vp();
-                    water();
-                    plant();
-                    Clock.yield();
-                }
+                c.vp();
+                u.sendAliveSignal();
+                c.shake();
+                bUnit(RobotType.SOLDIER);
+                bUnit(RobotType.LUMBERJACK);
+                m.wander(45, 7);
+                Clock.yield();
             } catch (Exception e) {
                 System.out.println("Gardener Exception");
                 e.printStackTrace();
