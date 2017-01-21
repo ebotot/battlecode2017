@@ -12,13 +12,30 @@ public class UnitCount {
     public void sendAliveSignal() throws GameActionException {
         rc.broadcast(getPreChannel(rc.getType()), rc.readBroadcast(getPreChannel(rc.getType())) + 1);
     }
+    public int unitCount(RobotType type)  throws GameActionException {
+        int amountOfUnit = pollPreAmount(type);
+        if (amountOfUnit == 0) {
+            amountOfUnit = pollAmount(type);
+        }
+        System.out.println("There are " + amountOfUnit + " " + type + " in the game!");
+
+        rc.broadcast(getChannel(type), amountOfUnit);
+        rc.broadcast(getPreChannel(type), 0);
+        return amountOfUnit;
+    }
+    private int pollPreAmount(RobotType type) throws GameActionException{
+        return rc.readBroadcast(getPreChannel(type));
+    }
+    private int pollAmount(RobotType type) throws GameActionException{
+        return rc.readBroadcast(getChannel(type));
+    }
     //cheat-sheet
     //Gardener = 0, 1
     //Soldier = 2, 3
     //Lumberjack = 4, 5
     //Scout = 6, 7
     //Tank = 8, 9
-    public static int getPreChannel(RobotType type) {
+    private static int getPreChannel(RobotType type) {
         switch(type) {
             case GARDENER:
                 return 0;
@@ -33,7 +50,7 @@ public class UnitCount {
         }
         return 0;
     }
-    public static int getChannel(RobotType type) {
+    private static int getChannel(RobotType type) {
         switch(type) {
             case GARDENER:
                 return 1;
