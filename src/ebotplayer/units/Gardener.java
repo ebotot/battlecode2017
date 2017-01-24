@@ -8,6 +8,7 @@ import ebotplayer.util.*;
  */
 public class Gardener extends Unit {
     private Direction[] plantD;
+    private int numTrees;
     public Gardener(RobotController rc) {
         super(rc);
         plantD = new Direction[6];
@@ -20,9 +21,11 @@ public class Gardener extends Unit {
                 u.sendAliveSignal();
                 c.shake();
                 bUnit(RobotType.SOLDIER);
-                if (u.unitCount(RobotType.SOLDIER) > 1) {
+                if (u.unitCount(RobotType.SOLDIER) > 0) {
                     water();
                     bUnit(RobotType.LUMBERJACK);
+                    //planting
+                    numberOfTrees();
                     plant();
                 }
                 if (rc.senseNearbyTrees((float)1.1, rc.getTeam()).length < 1) {
@@ -36,11 +39,24 @@ public class Gardener extends Unit {
         }
     }
     private void plant() throws GameActionException {
+        if (numTrees > 0) {
+            for (Direction d : plantD) {
+                if (rc.canPlantTree(d)) {
+                    rc.plantTree(d);
+                    break;
+                }
+            }
+        }
+    }
+    private void numberOfTrees() throws GameActionException {
+        numTrees = 0;
         for (Direction d : plantD) {
             if (rc.canPlantTree(d)) {
-                rc.plantTree(d);
-                break;
+                numTrees++;
             }
+        }
+        if (numTrees > 0) {
+            numTrees--;
         }
     }
     private void water() throws GameActionException {
