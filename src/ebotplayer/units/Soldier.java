@@ -11,6 +11,7 @@ public class Soldier extends BulletUnit {
         while(true) {
             try {
                 c.vp();
+                u.sendAliveSignal();
                 a.bullet();
                 c.shake();
                 if (!rc.hasAttacked()) {

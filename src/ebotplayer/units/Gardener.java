@@ -8,7 +8,6 @@ import ebotplayer.util.*;
  */
 public class Gardener extends Unit {
     private Direction[] plantD;
-    private boolean planter;
     public Gardener(RobotController rc) {
         super(rc);
         plantD = new Direction[6];
@@ -20,10 +19,12 @@ public class Gardener extends Unit {
                 c.vp();
                 u.sendAliveSignal();
                 c.shake();
-                water();
                 bUnit(RobotType.SOLDIER);
-                bUnit(RobotType.LUMBERJACK);
-                plant();
+                if (u.unitCount(RobotType.SOLDIER) > 1) {
+                    water();
+                    bUnit(RobotType.LUMBERJACK);
+                    plant();
+                }
                 if (rc.senseNearbyTrees((float)1.1, rc.getTeam()).length < 1) {
                     m.wander(30, 12);
                 }
