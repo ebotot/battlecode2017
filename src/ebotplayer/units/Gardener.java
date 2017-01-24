@@ -22,8 +22,8 @@ public class Gardener extends Unit {
                 c.shake();
                 bUnit(RobotType.SOLDIER);
                 if (u.unitCount(RobotType.SOLDIER) > 0) {
-                    water();
                     bUnit(RobotType.LUMBERJACK);
+                    water();
                     //planting
                     numberOfTrees();
                     plant();
@@ -31,6 +31,7 @@ public class Gardener extends Unit {
                 if (rc.senseNearbyTrees((float)1.1, rc.getTeam()).length < 1) {
                     m.wander(30, 12);
                 }
+                c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Gardener Exception");
@@ -72,7 +73,6 @@ public class Gardener extends Unit {
             }
             if (rc.canWater(tID)) {
                 rc.water(tID);
-                System.out.println("watered");
             }
         }
     }

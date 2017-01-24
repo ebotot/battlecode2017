@@ -18,13 +18,17 @@ public class Common {
             for (TreeInfo t : trees) {
                 if (rc.canShake(t.location) && t.containedBullets > 0) {
                     rc.shake(t.location);
-                    System.out.println("shook");
                     break;
                 }
             }
         }
     }
-    public void vp() throws GameActionException{
+    public void vp() throws GameActionException {
         if(rc.getTeamBullets() >= 10000) rc.donate(10000);
+    }
+    public void vpEnd() throws GameActionException {
+        if(rc.getTeamBullets() > 200) {
+            rc.donate( rc.getVictoryPointCost() );
+        }
     }
 }

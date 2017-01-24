@@ -12,12 +12,14 @@ public class Lumberjack extends Unit{
         while(true) {
             try {
                 c.vp();
+                u.sendAliveSignal();
                 strike();
                 if (canChop()) {
                     chop();
                 } else {
-                    m.wander(45, 7);
+                    m.wander(30, 12);
                 }
+                c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Lumberjack Exception");
@@ -47,7 +49,6 @@ public class Lumberjack extends Unit{
     private void chop() throws GameActionException {
         if (rc.canChop(choppingID)) {
             rc.chop(choppingID);
-            System.out.println("chopped");
         }
     }
     private void strike() throws GameActionException {
@@ -55,7 +56,6 @@ public class Lumberjack extends Unit{
         if (robots.length > 0) {
             if (rc.canStrike()) {
                 rc.strike();
-                System.out.println("struck");
             }
         }
     }

@@ -11,7 +11,13 @@ public class Scout extends BulletUnit {
         while(true) {
             try {
                 c.vp();
-
+                u.sendAliveSignal();
+                a.bullet();
+                c.shake();
+                if (!rc.hasAttacked()) {
+                    m.wander(30, 12);
+                }
+                c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Scout Exception");

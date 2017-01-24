@@ -15,8 +15,9 @@ public class Soldier extends BulletUnit {
                 a.bullet();
                 c.shake();
                 if (!rc.hasAttacked()) {
-                    m.wander(45, 7);
+                    m.wander(30, 12);
                 }
+                c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Soldier Exception");

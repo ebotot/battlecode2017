@@ -16,7 +16,8 @@ public class Archon extends Unit {
                     hGardener();
                 }
                 c.shake();
-                m.wander(45,7);
+                m.wander(30, 12);
+                c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {
                 System.out.println("Archon Exception");
