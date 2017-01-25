@@ -25,7 +25,7 @@ public class Soldier extends BulletUnit {
             }
         }
     }
-    private void findEnemies() throws GameActionException { //broken as well
+    private void findEnemies() throws GameActionException { //TODO broken as well
         RobotInfo[] enemies = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
         if (enemies.length > 0) {
             m.moveTo(rc.getLocation().directionTo(enemies[0].location));

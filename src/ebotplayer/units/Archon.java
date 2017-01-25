@@ -14,7 +14,6 @@ public class Archon extends Unit {
         while(true) {
             try {
                 c.vp();
-                gardCount();
                 hGardener();
                 c.shake();
                 m.wander(30, 12);
@@ -27,6 +26,7 @@ public class Archon extends Unit {
         }
     }
     private void hGardener() throws GameActionException {
+        gardCount();
         if (rc.hasRobotBuildRequirements(RobotType.GARDENER) && u.unitCount(RobotType.GARDENER) < gards) {
             Direction bDirection = Tools.randomDirection();
             int i = 0;

@@ -11,7 +11,7 @@ public class Attack {
         this.rc = rc;
         c = new Common(rc);
     }
-    public void bullet() throws GameActionException { //anti-friendly fire doesnt work
+    public void bullet() throws GameActionException { //TODO anti-friendly fire doesnt work
         RobotInfo[] robots = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
        // RobotInfo[] friends = rc.senseNearbyRobots(rc.getType().sensorRadius, rc.getTeam());
         if (robots.length > 0) {

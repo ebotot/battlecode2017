@@ -44,7 +44,7 @@ public class Movement {
             }
         }
     }
-    public void dodge() throws GameActionException { //no idea if this does shit, yeah it probably doesnt
+    public void dodge() throws GameActionException { //TODO no idea if this does shit, yeah it probably doesnt
         BulletInfo[] bullets = rc.senseNearbyBullets();
         for (BulletInfo b : bullets) {
             if (b.dir == b.location.directionTo(rc.getLocation())) {
@@ -52,9 +52,6 @@ public class Movement {
                 System.out.println("dodge");
             }
         }
-    }
-    public void offense() throws GameActionException {
-        //TODO move towards enemy
     }
     public void moveCorner() throws GameActionException {
         //TODO for the Archon to hide in corner and have trees build around
