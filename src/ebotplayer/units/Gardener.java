@@ -11,7 +11,7 @@ public class Gardener extends Unit {
     private int numTrees;
     public Gardener(RobotController rc) {
         super(rc);
-        plantD = new Direction[6];
+        plantD = new Direction[6]; //TODO Oaks Disciples uses square tree formation
         for (int i = 0 ; i < 6 ; i++) {
             plantD[i] = new Direction(0 + i * ((float)Math.PI / 3) );
         }
@@ -21,7 +21,7 @@ public class Gardener extends Unit {
                 u.sendAliveSignal();
                 c.shake();
                 bUnit(RobotType.SOLDIER);
-                if (u.unitCount(RobotType.SOLDIER) > 0) {
+                if (u.unitCount(RobotType.SOLDIER) > 0) { //TODO soldier count broken Oaks Disciples
                     bUnit(RobotType.LUMBERJACK);
                     water();
                     //planting

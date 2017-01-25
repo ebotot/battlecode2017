@@ -21,6 +21,6 @@ public class Attack {
            } else if (rc.canFireSingleShot()) {
                rc.fireSingleShot(rc.getLocation().directionTo(robots[0].location));
            }
-       }
+       } //TODO friendly fire also sometimes soldier endlessly spams bullets eg ChilisArmy
     }
 }
