@@ -11,7 +11,7 @@ public class Gardener extends Unit {
     private int numTrees;
     public Gardener(RobotController rc) {
         super(rc);
-        plantD = new Direction[6]; //TODO Oaks Disciples uses square tree formation
+        plantD = new Direction[6]; //Oaks Disciples uses square 8 tree formation, possibility
         for (int i = 0 ; i < 6 ; i++) {
             plantD[i] = new Direction(0 + i * ((float)Math.PI / 3) );
         }
