@@ -21,7 +21,7 @@ public class Gardener extends Unit {
                 u.sendAliveSignal();
                 c.shake();
                 bUnit(RobotType.SOLDIER);
-                if (u.unitCount(RobotType.SOLDIER) > 0) { //TODO soldier count broken Oaks Disciples
+                if (u.unitCount(RobotType.SOLDIER) > 0) { //soldier count broken Oaks Disciples
                     bUnit(RobotType.LUMBERJACK);
                     water();
                     //planting

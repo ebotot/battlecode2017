@@ -38,13 +38,13 @@ public class Archon extends Unit {
             }
         }
     }
-    private void gardCount() throws GameActionException { //TODO help determining good gardeners counts at bullet levels, my #'s are pretty random
+    private void gardCount() throws GameActionException { //help determining good gardeners counts at bullet levels, my #'s are pretty random
         if (rc.getTeamBullets() < 100) {
-            gards = 4;
-        } else if (rc.getTeamBullets() < 200) {
             gards = 6;
-        } else if (rc.getTeamBullets() < 400) {
+        } else if (rc.getTeamBullets() < 200) {
             gards = 8;
+        } else if (rc.getTeamBullets() < 400) {
+            gards = 10;
         } else {
             gards = 20;
         }

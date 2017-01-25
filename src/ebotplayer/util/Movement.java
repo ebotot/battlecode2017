@@ -16,10 +16,6 @@ public class Movement {
     }
 
     public void wander(float offset, int checks) throws GameActionException {
-        // if this looks like a confusing mess ill try to explain lol
-        //it picks a random direction to move, and if its blocked
-        //it changes its trajectory by the specificed offset angle
-        //int checks is how many times it will attempt change angle when blocked
         if (rc.canMove(dir)) {
             rc.move(dir);
         } else {
