@@ -27,7 +27,7 @@ public class Common {
         if(rc.getTeamBullets() >= 10000) rc.donate(10000);
     }
     public void vpEnd() throws GameActionException {
-        if(rc.getTeamBullets() > 200 || rc.getTeamVictoryPoints() > 500) {
+        if(rc.getTeamBullets() > 200 || rc.getTeamVictoryPoints() > 800) {
             rc.donate( rc.getVictoryPointCost() );
         }
     }

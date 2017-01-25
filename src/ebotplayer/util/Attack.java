@@ -13,14 +13,21 @@ public class Attack {
     }
     public void bullet() throws GameActionException { //help determining good fire-type at bullet levels, my #'s are pretty random
         RobotInfo[] robots = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
+        RobotInfo[] friends = rc.senseNearbyRobots(rc.getType().sensorRadius, rc.getTeam());
         if (robots.length > 0) {
-            if (rc.canFirePentadShot() && rc.getTeamBullets() > 200) {
-                rc.firePentadShot(rc.getLocation().directionTo(robots[0].location));
-            } else if (rc.canFireTriadShot() && rc.getTeamBullets() > 100) {
-                rc.fireTriadShot(rc.getLocation().directionTo(robots[0].location));
-            } else if (rc.canFireSingleShot()) {
-                rc.fireSingleShot(rc.getLocation().directionTo(robots[0].location));
+            for (RobotInfo r : robots) {
+                for (RobotInfo f : friends) {
+                    if (rc.getLocation().directionTo(r.location) != rc.getLocation().directionTo(f.location)) {
+                        if (rc.canFirePentadShot()) {
+                            rc.firePentadShot(rc.getLocation().directionTo(r.location));
+                        } else if (rc.canFireTriadShot()) {
+                            rc.fireTriadShot(rc.getLocation().directionTo(r.location));
+                        } else if (rc.canFireSingleShot()) {
+                            rc.fireSingleShot(rc.getLocation().directionTo(r.location));
+                        }
+                    }
+                }
             }
-        } //TODO friendly fire also sometimes soldier endlessly spams bullets eg ChilisArmy
+        }
     }
 }
