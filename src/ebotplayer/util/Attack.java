@@ -11,22 +11,22 @@ public class Attack {
         this.rc = rc;
         c = new Common(rc);
     }
-    public void bullet() throws GameActionException { //help determining good fire-type at bullet levels, my #'s are pretty random
+    public void bullet() throws GameActionException { //anti-friendly fire doesnt work
         RobotInfo[] robots = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
-        RobotInfo[] friends = rc.senseNearbyRobots(rc.getType().sensorRadius, rc.getTeam());
+       // RobotInfo[] friends = rc.senseNearbyRobots(rc.getType().sensorRadius, rc.getTeam());
         if (robots.length > 0) {
             for (RobotInfo r : robots) {
-                for (RobotInfo f : friends) {
-                    if (rc.getLocation().directionTo(r.location) != rc.getLocation().directionTo(f.location)) {
-                        if (rc.canFirePentadShot()) {
+                //for (RobotInfo f : friends) {
+                  //  if (rc.getLocation().directionTo(r.location) != rc.getLocation().directionTo(f.location)) {
+                        if (rc.canFirePentadShot() && rc.getTeamBullets() > 100) {
                             rc.firePentadShot(rc.getLocation().directionTo(r.location));
-                        } else if (rc.canFireTriadShot()) {
+                        } else if (rc.canFireTriadShot() && rc.getTeamBullets() > 50) {
                             rc.fireTriadShot(rc.getLocation().directionTo(r.location));
                         } else if (rc.canFireSingleShot()) {
                             rc.fireSingleShot(rc.getLocation().directionTo(r.location));
                         }
-                    }
-                }
+                  //  }
+              //  }
             }
         }
     }

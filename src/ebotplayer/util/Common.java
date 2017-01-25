@@ -24,10 +24,12 @@ public class Common {
         }
     }
     public void vp() throws GameActionException {
-        if(rc.getTeamBullets() >= 10000) rc.donate(10000);
+        if((rc.getTeamBullets() / rc.getVictoryPointCost()) + rc.getTeamVictoryPoints()  >= 10000) {
+            rc.donate(rc.getTeamBullets());
+        }
     }
     public void vpEnd() throws GameActionException {
-        if(rc.getTeamBullets() > 200 || rc.getTeamVictoryPoints() > 800) {
+        if(rc.getTeamBullets() > 200 || rc.getTeamVictoryPoints() > 600) {
             rc.donate( rc.getVictoryPointCost() );
         }
     }

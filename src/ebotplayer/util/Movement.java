@@ -16,6 +16,7 @@ public class Movement {
     }
 
     public void wander(float offset, int checks) throws GameActionException {
+        //dodge();
         if (rc.canMove(dir)) {
             rc.move(dir);
         } else {
@@ -27,6 +28,28 @@ public class Movement {
                     break;
                 }
                 currentCheck++;
+            }
+        }
+    }
+    public void moveTo(Direction move) throws GameActionException {
+        if (rc.canMove(move)) {
+            rc.move(move);
+        } else {
+            for (int i = 0 ; i < 5 ; i++) {
+                if(rc.canMove(move.rotateRightDegrees(10 * i))) {
+                    rc.move(move.rotateRightDegrees(10 * i));
+                } else if (rc.canMove(move.rotateLeftDegrees(10 * i))) {
+                    rc.move(move.rotateLeftDegrees(10 * i));
+                }
+            }
+        }
+    }
+    public void dodge() throws GameActionException { //no idea if this does shit, yeah it probably doesnt
+        BulletInfo[] bullets = rc.senseNearbyBullets();
+        for (BulletInfo b : bullets) {
+            if (b.dir == b.location.directionTo(rc.getLocation())) {
+                dir = b.dir.rotateLeftDegrees(90);
+                System.out.println("dodge");
             }
         }
     }

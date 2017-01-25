@@ -15,7 +15,7 @@ public class Soldier extends BulletUnit {
                 a.bullet();
                 c.shake();
                 if (!rc.hasAttacked()) {
-                    m.wander(30, 12);
+                    findEnemies();
                 }
                 c.vpEnd();
                 Clock.yield();
@@ -23,6 +23,16 @@ public class Soldier extends BulletUnit {
                 System.out.println("Soldier Exception");
                 e.printStackTrace();
             }
+        }
+    }
+    private void findEnemies() throws GameActionException { //broken as well
+        RobotInfo[] enemies = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
+        if (enemies.length > 0) {
+            m.moveTo(rc.getLocation().directionTo(enemies[0].location));
+            System.out.println("tracking down");
+        } else {
+            m.wander(30, 12);
+            System.out.println("wandering");
         }
     }
 }

@@ -10,7 +10,7 @@ public class Archon extends Unit {
     private int gards;
     public Archon(RobotController rc) {
         super(rc);
-        int gards = 4;
+        int gards = 6;
         while(true) {
             try {
                 c.vp();
@@ -39,14 +39,12 @@ public class Archon extends Unit {
         }
     }
     private void gardCount() throws GameActionException { //help determining good gardeners counts at bullet levels, my #'s are pretty random
-        if (rc.getTeamBullets() < 100) {
+        if (rc.getTeamBullets() < 200) {
             gards = 6;
-        } else if (rc.getTeamBullets() < 200) {
-            gards = 8;
         } else if (rc.getTeamBullets() < 400) {
-            gards = 10;
+            gards = 15;
         } else {
-            gards = 20;
+            gards = 50;
         }
     }
 }
