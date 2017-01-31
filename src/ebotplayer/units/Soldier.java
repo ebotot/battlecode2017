@@ -14,7 +14,14 @@ public class Soldier extends BulletUnit {
                 u.sendAliveSignal();
                 a.bullet();
                 c.shake();
-                m.findEnemies();
+                if (!rc.hasAttacked()) {
+                    if(a.getLastDir() != null) {
+                        m.moveTo(a.getLastDir());
+                    }
+                    else{
+                        m.wander(30, 12);
+                    }
+                }
                 c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {

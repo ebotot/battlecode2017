@@ -7,6 +7,7 @@ import battlecode.common.*;
 public class Attack {
     private RobotController rc;
     private Common c;
+    private Direction lastDir;
     public Attack(RobotController rc) {
         this.rc = rc;
         c = new Common(rc);
@@ -15,6 +16,7 @@ public class Attack {
         RobotInfo[] robots = rc.senseNearbyRobots(rc.getType().sensorRadius, c.enemy());
        // RobotInfo[] friends = rc.senseNearbyRobots(rc.getType().sensorRadius, rc.getTeam());
         if (robots.length > 0) {
+            lastDir = rc.getLocation().directionTo(robots[0].location);
             for (RobotInfo r : robots) {
                 //for (RobotInfo f : friends) {
                   //  if (rc.getLocation().directionTo(r.location) != rc.getLocation().directionTo(f.location)) {
@@ -29,5 +31,8 @@ public class Attack {
               //  }
             }
         }
+    }
+    public Direction getLastDir() {
+        return lastDir;
     }
 }

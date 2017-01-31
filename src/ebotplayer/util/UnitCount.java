@@ -13,21 +13,22 @@ public class UnitCount {
         rc.broadcast(getPreChannel(rc.getType()), rc.readBroadcast(getPreChannel(rc.getType())) + 1);
     }
     public int unitCount(RobotType type)  throws GameActionException {
-        int amountOfUnit = pollPreAmount(type);
-        if (amountOfUnit == 0) {
-            amountOfUnit = pollAmount(type);
-        }
-        System.out.println("There are " + amountOfUnit + " " + type + " in the game!");
-
-        rc.broadcast(getChannel(type), amountOfUnit);
-        rc.broadcast(getPreChannel(type), 0);
-        return amountOfUnit;
+        System.out.println("There are " + pollPreAmount(type) + " " + type + " in the game!");
+        return pollPreAmount(type);
     }
     private int pollPreAmount(RobotType type) throws GameActionException{
         return rc.readBroadcast(getPreChannel(type));
     }
     private int pollAmount(RobotType type) throws GameActionException{
         return rc.readBroadcast(getChannel(type));
+    }
+    public void clearAll() throws GameActionException {
+        rc.broadcast(0,0);
+        rc.broadcast(2,0);
+        rc.broadcast(4,0);
+        rc.broadcast(6,0);
+        rc.broadcast(8,0);
+
     }
     //cheat-sheet
     //Gardener = 0, 1
