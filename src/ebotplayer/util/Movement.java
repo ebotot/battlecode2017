@@ -7,8 +7,10 @@ import battlecode.common.*;
 public class Movement {
     private RobotController rc;
     private Direction dir;
+    private Common c;
     public Movement(RobotController rc) {
         this.rc = rc;
+        c = new Common(rc);
         dir = new Direction(0);
     }
     private void setDir(Direction dir){
@@ -42,6 +44,16 @@ public class Movement {
                     rc.move(move.rotateLeftDegrees(10 * i));
                 }
             }
+        }
+    }
+    public void findEnemies() throws GameActionException {
+        RobotInfo[] enemies = rc.senseNearbyRobots(-1, c.enemy());
+        if (enemies.length > 0) {
+            moveTo(rc.getLocation().directionTo(enemies[0].location));
+            System.out.println("tracking down");
+        } else {
+            wander(30, 12);
+            System.out.println("wandering");
         }
     }
     public void dodge() throws GameActionException { //TODO no idea if this does shit, yeah it probably doesnt

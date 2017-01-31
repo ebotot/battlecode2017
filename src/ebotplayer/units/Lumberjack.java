@@ -7,6 +7,7 @@ import ebotplayer.units.base.Unit;
  */
 public class Lumberjack extends Unit{
     private int choppingID;
+    private Direction target;
     public Lumberjack(RobotController rc) {
         super(rc);
         while(true) {
@@ -14,10 +15,14 @@ public class Lumberjack extends Unit{
                 c.vp();
                 u.sendAliveSignal();
                 strike();
-                if (canChop()) {
-                    chop();
+                if (rc.hasAttacked()) {
+                    m.moveTo(target);
                 } else {
-                    m.wander(30, 12);
+                    if (canChop()) {
+                        chop();
+                    } else {
+                        m.findEnemies();
+                    }
                 }
                 c.vpEnd();
                 Clock.yield();
@@ -56,6 +61,7 @@ public class Lumberjack extends Unit{
         if (robots.length > 0) {
             if (rc.canStrike()) {
                 rc.strike();
+                target = rc.getLocation().directionTo(robots[0].location);
             }
         }
     }

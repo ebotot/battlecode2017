@@ -14,9 +14,7 @@ public class Scout extends BulletUnit {
                 u.sendAliveSignal();
                 a.bullet();
                 c.shake();
-                if (!rc.hasAttacked()) {
-                    m.wander(30, 12);
-                }
+                m.findEnemies();
                 c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {

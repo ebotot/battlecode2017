@@ -14,9 +14,7 @@ public class Tank extends BulletUnit{
                 u.sendAliveSignal();
                 a.bullet();
                 c.shake();
-                if (!rc.hasAttacked()) {
-                    m.wander(30, 12); //TODO tanks attack friendly trees - The Most Insignificant Bits
-                }
+                m.findEnemies();//TODO tanks attack friendly trees - The Most Insignificant Bits
                 c.vpEnd();
                 Clock.yield();
             } catch (Exception e) {
