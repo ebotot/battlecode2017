@@ -15,7 +15,7 @@ public class Tank extends BulletUnit{
                 a.bullet();
                 c.shake();
                 if (!rc.hasAttacked()) {
-                    if(a.getLastDir() != null) {
+                    if(a.getLastDir() != null && rc.canMove(a.getLastDir())) {
                         m.moveTo(a.getLastDir());
                     }
                     else{
