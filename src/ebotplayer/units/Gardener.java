@@ -26,9 +26,11 @@ public class Gardener extends Unit {
                     water();
                     //planting
                     numberOfTrees();
-                    plant();
+                    if (!nearbyGardener()) {
+                        plant();
+                    }
                 }
-                if (rc.senseNearbyTrees((float)1.1, rc.getTeam()).length < 1) {
+                if (rc.senseNearbyTrees((float)1.1, rc.getTeam()).length < 1 || nearbyGardener()) {
                     m.wander(30, 12);
                 }
                 c.vpEnd();
@@ -81,6 +83,18 @@ public class Gardener extends Unit {
         if (rc.canBuildRobot(type, bDirection)) {
             rc.buildRobot(type, bDirection);
         }
+    }
+    private boolean nearbyGardener() throws GameActionException {
+        RobotInfo[] gardeners = rc.senseNearbyRobots((float)5, rc.getTeam());
+        if (gardeners.length > 0) {
+            for(RobotInfo r : gardeners) {
+                if (r.type == RobotType.GARDENER) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return false;
     }
 }
 
