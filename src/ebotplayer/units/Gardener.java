@@ -20,14 +20,20 @@ public class Gardener extends Unit {
                 c.vp();
                 u.sendAliveSignal();
                 c.shake();
-                bUnit(RobotType.SOLDIER);
+                if (u.unitCount(RobotType.SOLDIER) < 2 * u.unitCount(RobotType.GARDENER) || rc.getTeamBullets() > 500) {
+                    bUnit(RobotType.SOLDIER);
+                }
                 if (u.unitCount(RobotType.SOLDIER) > 0) { //soldier count broken Oaks Disciples
-                    bUnit(RobotType.LUMBERJACK);
-                    water();
-                    //planting
-                    numberOfTrees();
-                    if (!nearbyGardener()) {
-                        plant();
+                    if (u.unitCount(RobotType.LUMBERJACK) < u.unitCount(RobotType.GARDENER) || rc.getTeamBullets() > 600) {
+                        bUnit(RobotType.LUMBERJACK);
+                    }
+                    if (u.unitCount(RobotType.LUMBERJACK) > 0) {
+                        water();
+                        //planting
+                        numberOfTrees();
+                        if (!nearbyGardener()) {
+                            plant();
+                        }
                     }
                 }
                 if (rc.senseNearbyTrees((float)1.1, rc.getTeam()).length < 1 || nearbyGardener()) {
